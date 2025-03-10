@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero text-center py-5 bg-light">
+    <h1>Welcome to Paws Haven</h1>
+    <p>Find your new best friend and give a rescue animal their forever home</p>
+</div>
+
+<div class="container my-5">
+    <h2>Why Adopt?</h2>
+    <p>Every year, thousands of animals end up in shelters. By adopting, you're not just getting a new pet - 
+    you're saving a life and making space for another animal in need.</p>
+    
+    <h2>Our Adoption Process</h2>
+    <ol>
+        <li>Visit our shelter and meet the animals</li>
+        <li>Complete an adoption application</li>
+        <li>Home check and interview</li>
+        <li>Finalize adoption paperwork</li>
+        <li>Take your new friend home!</li>
+    </ol>
+</div>
+
+<div class="dog-gallery row">
+    {% for animal in animals %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="{{ animal.image_url }}" class="card-img-top" alt="{{ animal.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ animal.name }}</h5>
+                <p class="card-text">{{ animal.description }}</p>
+                <button class="btn btn-primary" onclick="openModal('{{ animal.name }}')">Adopt Me</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adopt <span id="dog-name"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Please contact us to arrange a meeting with this lovely animal. All adoptions require:</p>
+                <ul>
+                    <li>Valid ID proof</li>
+                    <li>Proof of address</li>
+                    <li>Veterinary reference (if previous pet owner)</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="/contact" class="btn btn-primary">Adopt Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
